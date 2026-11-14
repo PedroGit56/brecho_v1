@@ -1,0 +1,937 @@
+/* =========================================
+   1. BODY (DESKTOP WINDOWS XP / Y2K)
+   ========================================= */
+body {
+    font-family: 'Plus Jakarta Sans', 'Tahoma', sans-serif;
+    /* Fundo nítido sem camada opaca por cima para mostrar o wallpaper */
+    background-image: url('./assets/windows.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: #3a6ea5; /* Azul clássico de backup do Windows */
+    color: #000000;
+}
+.container {
+    max-width: 1000px; /* Limita a largura no desktop para ficar compacto */
+    margin: 24px auto; /* Centraliza na tela e deixa o wallpaper visível nas laterais e topo */
+    padding: 0 20px;
+}
+
+
+/* =========================================
+   2. CABEÇALHO (BARRA DE TAREFAS / JANELA)
+   ========================================= */
+.cabecalho {
+    background: transparent; /* Cinza/bege clássico das janelas XP */
+    padding: 15px 0;
+    margin-bottom: 35px;
+    
+}
+
+/* =========================================
+   3. TÍTULO DA SEÇÃO + ADESIVO "I ♥ THRIFTING"
+   ========================================= */
+/* =========================================
+   3. TÍTULO CENTRALIZADO + ADESIVO NO CÉU À DIREITA
+   ========================================= */
+.titulo-secao {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centraliza o título na barra */
+    gap: 15px;
+    background: #ece9d8;
+    border: 2px solid #0054e3;
+    padding: 12px 20px;
+    border-radius: 4px;
+    margin-bottom: 28px;
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.titulo-secao h3 {
+    font-size: 14px;
+    font-weight: 800;
+    color: #003399;
+    letter-spacing: 0.8px;
+    text-align: center;
+    margin: 0;
+}
+
+/* Remove o divisor lateral para o texto ficar 100% centralizado */
+.titulo-secao .divisor {
+    display: none;
+}
+
+
+/* Adesivo oval "I ♥ THRIFTING" ampliado no céu à direita */
+.titulo-secao::after {
+    content: "I ❤️\A THRIFTING";
+    white-space: pre;
+    position: absolute;
+    left: calc(100% + 22px); /* Joga o adesivo para fora da caixa, direto no céu */
+    top: 50%;
+    transform: translateY(-50%) rotate(8deg);
+    background: #ffffff;
+    color: #111111;
+    border: 3.5px solid #111111; /* Borda preta mais grossa proporcional ao tamanho */
+    outline: 3px solid #ffffff; /* Contorno branco externo de adesivo recortado */
+    box-shadow: 5px 7px 0px rgba(0, 0, 0, 0.35);
+    border-radius: 50%;
+    padding: 15px 30px; /* Aumentado para deixar o oval bem maior */
+    font-family: 'Impact', 'Arial Black', 'Montserrat', sans-serif;
+    font-size: 16px; /* Texto bem maior e legível */
+    font-weight: 900;
+    line-height: 1.05;
+    text-align: center;
+    letter-spacing: 0.6px;
+    z-index: 5;
+    pointer-events: none;
+}
+
+/* Ajuste proporcional para telas menores / celular */
+/* Ajuste bem maior e destacado para celular e telas menores */
+@media (max-width: 1180px) {
+    .titulo-secao {
+        margin-top: 48px; /* Abre espaço no céu acima da barra para o adesivo maior caber folgado */
+    }
+
+    .titulo-secao::after {
+        left: auto;
+        right: 4px;
+        top: -2px; /* Sobe um pouco para flutuar no céu logo acima da borda */
+        transform: rotate(7deg);
+        padding: 20px 30px; /* Tamanho bem maior no celular */
+        font-size: 16px; /* Texto grande e nítido */
+        border-width: 3.5px;
+        outline-width: 3px;
+    }
+}
+
+
+
+
+    .titulo-secao::after {
+        right: 8px;
+        padding: 5px 11px;
+        font-size: 8.5px;
+        transform: translateY(-50%) rotate(6deg);
+    }
+
+    /* =========================================
+   BONZIBUDDY (opa.gif) DE PÉ EM CIMA DA BARRA
+   ========================================= */
+.titulo-secao {
+    margin-top: 68px; /* Espaço no céu acima da barra para o Bonzi ficar de pé */
+}
+
+.titulo-secao::before {
+    content: "";
+    position: absolute;
+    left: 24px;
+    bottom: 80%; /* Pés apoiados exatamente na borda superior da aba */
+    width: 82px;
+    height: 82px;
+    background-image: url('./assets/opa.gif');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    z-index: 6;
+    pointer-events: none;
+}
+
+/* Rover acompanha o Bonzi e fica apoiado sobre a aba. */
+.banner-destaque .rover {
+    position: absolute;
+    right: 4px;
+    bottom: calc(100% - 34px);
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    object-position: bottom center;
+    z-index: 6;
+    pointer-events: none;
+}
+
+/* Ajuste no celular para não bater no adesivo da direita */
+@media (max-width: 650px) {
+    .titulo-secao {
+        margin-top: 62px;
+    }
+
+    .titulo-secao::before {
+        left: 12px;
+        width: 90px;
+        height: 140px;
+    }
+
+    .banner-destaque .rover {
+        right: -30px;
+        bottom: calc(100% - 34px);
+        width: 140px;
+        height: 140px;
+    }
+}
+
+
+
+
+
+
+.cabecalho header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    max-width: 360px; /* Largura ampliada para a logo respirar */
+}
+
+.logo span {
+    color: #d62828;
+    font-style: italic;
+}
+.logo img {
+    height: 115px; /* Bem maior e mais visível no cabeçalho */
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+    display: block;
+    transition: transform 0.2s ease;
+}
+.logo img:hover {
+    transform: scale(1.04);
+}
+
+@media (max-width: 650px) {
+    .cabecalho {
+        padding: 16px 12px;
+    }
+
+    .cabecalho header {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+    }
+
+    .logo {
+        width: 100%;
+        max-width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .logo img {
+        width: 280px;
+        max-width: 88%;
+        height: auto;
+        margin: -14px auto;
+    }
+
+    .cabecalho .options {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .cabecalho ul {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        justify-content: center;
+        gap: 12px;
+    }
+
+    .btn-principal {
+        padding: 8px;
+        font-size: 12px;
+        white-space: nowrap;
+        max-width: 150px;
+        width: 120px;
+        text-align: center;
+    }
+}
+.cabecalho ul {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.link-menu {
+    text-decoration: none;
+    color: #000000;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 4px 8px;
+    border: 1px solid transparent;
+    transition: all 0.15s;
+}
+
+.link-menu:hover {
+    background: #ffffff;
+    border: 1px solid #0054e3;
+    color: #0054e3;
+}
+
+/* Botões estilo Windows Clássico (Relevo 3D) */
+.btn-principal {
+    padding: 8px 18px;
+    border-radius: 3px;
+    border-top: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #404040;
+    border-bottom: 2px solid #404040;
+    background: #d4d0c8;
+    font-family: 'Tahoma', 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: #000000;
+    cursor: pointer;
+    transition: all 0.1s;
+}
+
+.btn-principal:hover {
+    background: #e2dfd7;
+    outline: 1px dotted #000000;
+    outline-offset: -4px;
+}
+
+.btn-principal:active {
+    border-top: 2px solid #404040;
+    border-left: 2px solid #404040;
+    border-right: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+    transform: translate(1px, 1px);
+}
+
+/* =========================================
+   3. BANNER DESTAQUE (JANELA POP-UP WINDOWS)
+   ========================================= */
+.banner-destaque {
+    position: relative;
+    background: #ece9d8; /* Corpo da janela */
+    border: 3px solid #0054e3; /* Borda azul vibrante XP */
+    border-radius: 8px 8px 4px 4px;
+    /* Barra de título azul no topo da janela */
+    background-image: linear-gradient(180deg, #0058ee 0%, #3593ff 4%, #288eff 18%, #0054e3 100%);
+    background-size: 100% 34px;
+    background-repeat: no-repeat;
+    padding: 40px 50px 20px 30px;
+    margin-bottom: 50px;
+    text-align: center;
+    color: #000000;
+    box-shadow: 6px 8px 0px rgba(0, 0, 0, 0.35);
+}
+
+/* Título da janela no canto superior esquerdo */
+.banner-destaque::before {
+    content: "📁 Colecao_OS_2000.exe";
+    position: absolute;
+    top: 8px;
+    left: 12px;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 700;
+    text-shadow: 1px 1px 1px #001f66;
+}
+
+/* Botões [_] [□] [X] no canto superior direito */
+.banner-destaque::after {
+    content: "_   □   ✕";
+    position: absolute;
+    top: 6px;
+    right: 10px;
+    background: #d62828;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 3px 8px;
+    border: 1px solid #ffffff;
+    border-radius: 3px;
+    box-shadow: inset 0 -1px 0 #800000;
+}
+
+.banner-texto .subtitulo {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    color: #0054e3;
+    background: #ffffff;
+    border: 2px inset #808080;
+    padding: 5px 16px;
+    border-radius: 2px;
+    display: inline-block;
+    margin-bottom: 16px;
+}
+
+.banner-texto h1 {
+    font-size: 32px;
+    font-weight: 800;
+    color: #003399;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+}
+
+.banner-texto p {
+    font-size: 14px;
+    color: #222222;
+    max-width: 520px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* =========================================
+   4. VITRINE DE ROUPAS (SEM QUEBRAR MODAIS)
+   ========================================= */
+.campo-roupas {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    padding-bottom: 50px;
+}
+
+.card-roupa {
+    position: relative;
+    background: #ece9d8;
+    background-image: linear-gradient(180deg, #0058ee 0%, #288eff 20%, #0054e3 100%);
+    background-size: 100% 26px;
+    background-repeat: no-repeat;
+    padding: 34px 10px 12px 10px;
+    border-radius: 6px 6px 2px 2px;
+    border: 2px solid #0054e3;
+    box-shadow: 4px 5px 0px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+/* Botão X vermelho no canto de cada card */
+.card-roupa::after {
+    content: "✕";
+    position: absolute;
+    top: 4px;
+    right: 6px;
+    background: #d62828;
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 800;
+    width: 18px;
+    height: 17px;
+    line-height: 17px;
+    text-align: center;
+    border: 1px solid #ffffff;
+    border-radius: 2px;
+    pointer-events: none; /* Garante que não bloqueie cliques */
+}
+
+/* Hover sem 'transform' para não prender modais com position: fixed */
+.card-roupa:hover {
+    border-color: #3593ff;
+    box-shadow: 6px 8px 0px rgba(0, 0, 0, 0.45);
+}
+
+.imagem-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    border-radius: 2px;
+    border-top: 2px solid #808080;
+    border-left: 2px solid #808080;
+    border-right: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+    background-color: #ffffff;
+    margin-bottom: 12px;
+}
+
+.etiqueta {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background: #ffffe1;
+    border: 1px solid #000000;
+    color: #000000;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 8px;
+    z-index: 2;
+}
+
+.imagem-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.35s ease;
+}
+
+.card-roupa:hover .imagem-container img {
+    transform: scale(1.05);
+}
+
+.btn-detalhes {
+    position: absolute;
+    bottom: -48px;
+    left: 8px;
+    right: 8px;
+    padding: 8px;
+    background: #d4d0c8;
+    border-top: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #404040;
+    border-bottom: 2px solid #404040;
+    color: #000000;
+    font-family: 'Tahoma', 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: bottom 0.25s ease;
+    z-index: 2;
+}
+
+.card-roupa:hover .btn-detalhes {
+    bottom: 8px;
+}
+
+.btn-detalhes:hover,
+.btn-comprar:hover {
+    background: #0054e3;
+    color: #ffffff;
+}
+
+.info-roupa h3 {
+    font-size: 13px;
+    font-weight: 700;
+    color: #000000;
+    margin-bottom: 4px;
+}
+
+.info-roupa .preco {
+    font-size: 15px;
+    font-weight: 800;
+    color: #0054e3;
+    margin-bottom: 2px;
+}
+
+.info-roupa .parcelas {
+    font-size: 10px;
+    font-weight: 500;
+    color: #444444;
+    display: block;
+}
+
+/* =========================================
+   6. MODAIS (REDES SOCIAIS E DETALHES - WINDOWS XP)
+   ========================================= */
+.modal-fundo {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.55);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    padding: 16px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.modal-fundo.ativo,
+.modal-fundo.active,
+.modal-fundo.aberto,
+.modal-fundo.open,
+.modal-fundo.show {
+    display: flex !important;
+}
+
+/* Caixa principal da janela do Modal */
+.modal-caixa {
+    position: relative;
+    box-sizing: border-box;
+    background: #ece9d8;
+    background-image: linear-gradient(180deg, #0058ee 0%, #3593ff 4%, #288eff 18%, #0054e3 100%);
+    background-size: 100% 34px;
+    background-repeat: no-repeat;
+    border: 3px solid #0054e3;
+    border-radius: 8px 8px 4px 4px;
+    padding: 48px 20px 20px 20px;
+    width: 100%;
+    max-width: 420px;
+    max-height: 92vh;
+    overflow-y: auto;
+    color: #000000;
+    box-shadow: 6px 8px 0px rgba(0, 0, 0, 0.45);
+    text-align: center;
+    margin: auto;
+}
+
+#modal-redes .modal-caixa::before {
+    content: "🌐 Redes_Sociais.exe";
+    position: absolute;
+    top: 8px;
+    left: 12px;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 700;
+    text-shadow: 1px 1px 1px #001f66;
+}
+
+#modal-detalhes .modal-caixa::before {
+    content: "👕 Detalhes_da_Peca.exe";
+    position: absolute;
+    top: 8px;
+    left: 12px;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 700;
+    text-shadow: 1px 1px 1px #001f66;
+}
+
+/* Botão fechar [×] vermelho no canto superior direito */
+.modal-fechar {
+    position: absolute;
+    top: 5px;
+    right: 8px;
+    background: #d62828;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    border-radius: 3px;
+    width: 24px;
+    height: 22px;
+    font-size: 15px;
+    font-weight: 800;
+    line-height: 18px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: inset 0 -1px 0 #800000;
+    z-index: 5;
+}
+
+.modal-fechar:hover {
+    background: #ff3b3b;
+}
+
+.modal-caixa h3 {
+    font-size: 18px;
+    font-weight: 800;
+    color: #003399;
+    margin-bottom: 8px;
+}
+
+.modal-caixa p {
+    font-size: 13px;
+    color: #222222;
+    line-height: 1.45;
+    margin-bottom: 14px;
+}
+
+/* Botões dentro dos modais */
+.modal-botoes {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.btn-social,
+.btn-comprar-insta {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px 14px;
+    background: #d4d0c8;
+    border-top: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #404040;
+    border-bottom: 2px solid #404040;
+    color: #000000;
+    text-decoration: none;
+    font-family: 'Tahoma', 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+}
+
+.btn-social:hover,
+.btn-comprar-insta:hover {
+    background: #0054e3;
+    color: #ffffff;
+}
+
+/* =========================================
+   7. LAYOUT INTERNO DO MODAL DE DETALHES
+   ========================================= */
+.modal-roupa-caixa {
+    max-width: 740px; /* Janela mais ampla para destacar a peça */
+    text-align: left;
+}
+
+.modal-roupa-conteudo {
+    display: grid;
+    grid-template-columns: 310px 1fr; /* Foto bem maior no desktop */
+    gap: 24px;
+    align-items: center;
+}
+
+/* Container da imagem maior, preenchido e com zoom ao passar o mouse */
+.modal-img-wrapper {
+    width: 310px;
+    height: 390px;
+    background: #ffffff;
+    border-top: 2px solid #808080;
+    border-left: 2px solid #808080;
+    border-right: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+    padding: 3px;
+    box-sizing: border-box;
+    overflow: hidden;
+    margin: 0 auto;
+    cursor: zoom-in;
+}
+
+.modal-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Preenche todo o quadro sem faixas brancas sobrando */
+    object-position: center;
+    display: block;
+    transition: transform 0.35s ease;
+}
+
+/* Zoom suave para o cliente ver detalhes da estampa/tecido */
+.modal-img-wrapper:hover img {
+    transform: scale(1.15);
+}
+
+.modal-roupa-info {
+    min-width: 0;
+}
+
+.etiqueta-modal {
+    display: inline-block;
+    background: #ffffe1;
+    border: 1px solid #000000;
+    color: #000000;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 8px;
+    margin-bottom: 8px;
+}
+
+.modal-roupa-info h3 {
+    font-size: 20px;
+    margin-bottom: 4px;
+    word-wrap: break-word;
+}
+
+.detalhe-preco {
+    font-size: 22px !important;
+    font-weight: 800;
+    color: #0054e3 !important;
+    margin-bottom: 10px !important;
+}
+
+.detalhe-desc {
+    font-size: 13px !important;
+    margin-bottom: 10px !important;
+}
+
+.detalhe-medidas {
+    font-size: 12px !important;
+    background: #ffffff;
+    border: 1px inset #808080;
+    padding: 7px 10px;
+    margin-bottom: 14px !important;
+}
+
+.btn-comprar {
+    margin-bottom: 8px;
+    background: #c2db7c;
+}
+
+.btn-comprar:hover {
+    background: #388e3c;
+    color: #ffffff;
+}
+
+/* Ajuste para telas estreitas / celular */
+@media (max-width: 680px) {
+    .modal-roupa-caixa {
+        max-width: 410px;
+    }
+
+    .modal-roupa-conteudo {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    /* Quadro bem maior e mais confortável de ver no celular/janela estreita */
+    .modal-img-wrapper {
+        width: 100%;
+        max-width: 280px;
+        height: 310px;
+    }
+}
+
+/* =========================================
+   8. VISUALIZADOR DE FOTOS (LIGHTBOX WINDOWS XP)
+   ========================================= */
+#modal-foto-cheia {
+    z-index: 10000; /* Fica na frente até mesmo do modal de detalhes */
+}
+
+.modal-lightbox-caixa {
+    max-width: 780px;
+    width: 95%;
+    padding: 46px 16px 16px 16px;
+}
+
+#modal-foto-cheia .modal-caixa::before {
+    content: "🖼️ Visualizador_de_Imagens_XP.exe";
+    position: absolute;
+    top: 8px;
+    left: 12px;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 700;
+    text-shadow: 1px 1px 1px #001f66;
+}
+
+.lightbox-corpo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.lightbox-img-container {
+    flex: 1;
+    height: 68vh; /* Ocupa 68% da altura da tela para ver a peça inteira */
+    max-height: 540px;
+    background: #ffffff;
+    border-top: 2px solid #808080;
+    border-left: 2px solid #808080;
+    border-right: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 6px;
+}
+
+.lightbox-img-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Garante que a roupa apareça 100% inteira sem nenhum corte */
+}
+
+/* Setas laterais estilo botão clássico do Windows */
+.btn-seta-foto {
+    background: #d4d0c8;
+    border-top: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #404040;
+    border-bottom: 2px solid #404040;
+    color: #000000;
+    font-size: 16px;
+    width: 38px;
+    height: 48px;
+    cursor: pointer;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-seta-foto:hover {
+    background: #0054e3;
+    color: #ffffff;
+}
+
+.btn-seta-foto:active {
+    border-top: 2px solid #404040;
+    border-left: 2px solid #404040;
+    border-right: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+}
+
+.lightbox-legenda {
+    margin-top: 12px !important;
+    margin-bottom: 0 !important;
+    font-size: 12.5px !important;
+    font-weight: 700;
+    color: #003399 !important;
+    background: #ffffff;
+    border: 1px inset #808080;
+    padding: 6px 10px;
+}
+
+/* Indica visualmente que a foto dentro do modal de detalhes é clicável */
+#detalhe-img {
+    cursor: zoom-in;
+}
+
+@media (max-width: 550px) {
+    .lightbox-img-container {
+        height: 55vh;
+    }
+
+    .btn-seta-foto {
+        width: 32px;
+        height: 40px;
+        font-size: 13px;
+    }
+}
+
+
+
+
+/* =========================================
+   5. RODAPÉ (BARRA INFERIOR / START BAR)
+   ========================================= */
+.rodape {
+    background: linear-gradient(180deg, #245edb 0%, #3f8cf3 9%, #245edb 18%, #1941a5 100%);
+    border-top: 2px solid #3f8cf3;
+    text-align: center;
+    padding: 16px 0;
+    font-size: 12px;
+    font-weight: 600;
+    color: #ffffff;
+    text-shadow: 1px 1px 1px #0f296e;
+}
+
+.rodape p::before {
+    content: "🪟 ";
+}
+
+/* Responsividade */
+@media (max-width: 900px) {
+    .campo-roupas {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .campo-roupas {
+        grid-template-columns: 1fr;
+    }
+
+    .btn-detalhes {
+        bottom: 8px;
+    }
+}
