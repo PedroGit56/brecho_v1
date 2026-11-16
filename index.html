@@ -32,7 +32,6 @@
 
         <!-- Banner de destaque -->
         <section class="banner-destaque">
-            <img class="rover" src="assets/rover.gif" alt="Rover">
             <div class="banner-texto">
                 <span class="subtitulo">SEJA BEM VINDO</span>
                 
@@ -163,6 +162,15 @@
     </div>
 
     <!-- Modal de Redes Sociais -->
+    <div class="modal-fundo" id="modal-sobre">
+        <div class="modal-caixa">
+            <button class="modal-fechar" id="btn-fechar-sobre" aria-label="Fechar">&times;</button>
+            <h3>Sobre a Caçulinha Brechó</h3>
+            <p>Peças únicas, selecionadas com cuidado para ganhar uma nova história.</p>
+            <p>Nosso garimpo reúne estilo, personalidade e preços acessíveis para você se vestir do seu jeito.</p>
+        </div>
+    </div>
+
     <div class="modal-fundo" id="modal-redes">
         <div class="modal-caixa">
             <button class="modal-fechar" id="btn-fechar">&times;</button>
@@ -209,13 +217,9 @@
         <button class="modal-fechar" id="btn-fechar-foto">&times;</button>
         
         <div class="lightbox-corpo">
-            <button class="btn-seta-foto" id="btn-foto-anterior" title="Foto anterior">&#9664;</button>
-            
             <div class="lightbox-img-container">
                 <img id="img-tela-cheia" src="" alt="Visualização ampliada da peça">
             </div>
-            
-            <button class="btn-seta-foto" id="btn-foto-proxima" title="Próxima foto">&#9654;</button>
         </div>
 
         <p class="lightbox-legenda" id="legenda-foto-cheia">Visualizando peça</p>
@@ -227,6 +231,26 @@
     <!-- Script do Modal -->
    <!-- Script dos Modais -->
     <script>
+        // 0. Modal Sobre
+        const btnSobre = document.getElementById('btn-sobre');
+        const modalSobre = document.getElementById('modal-sobre');
+        const btnFecharSobre = document.getElementById('btn-fechar-sobre');
+
+        btnSobre.addEventListener('click', () => {
+            modalSobre.classList.add('ativo');
+            document.body.classList.add('modal-aberto');
+        });
+
+        function fecharModalSobre() {
+            modalSobre.classList.remove('ativo');
+            document.body.classList.remove('modal-aberto');
+        }
+
+        btnFecharSobre.addEventListener('click', fecharModalSobre);
+        modalSobre.addEventListener('click', (evento) => {
+            if (evento.target === modalSobre) fecharModalSobre();
+        });
+
         // 1. Modal de Redes Sociais
         const btnAbrir = document.getElementById('btn-redes');
         const modal = document.getElementById('modal-redes');
@@ -264,16 +288,19 @@
                 fotoAtualIndex = index;
 
                 modalDetalhes.classList.add('ativo');
+                document.body.classList.add('modal-aberto');
             });
         });
 
         btnFecharDetalhes.addEventListener('click', () => {
             modalDetalhes.classList.remove('ativo');
+            document.body.classList.remove('modal-aberto');
         });
 
         modalDetalhes.addEventListener('click', (evento) => {
             if (evento.target === modalDetalhes) {
                 modalDetalhes.classList.remove('ativo');
+                document.body.classList.remove('modal-aberto');
             }
         });
 
@@ -282,8 +309,6 @@
         const imgTelaCheia = document.getElementById('img-tela-cheia');
         const legendaFotoCheia = document.getElementById('legenda-foto-cheia');
         const btnFecharFoto = document.getElementById('btn-fechar-foto');
-        const btnFotoAnterior = document.getElementById('btn-foto-anterior');
-        const btnFotoProxima = document.getElementById('btn-foto-proxima');
 
         // Monta a lista com todas as peças da vitrine usando a mesma URL (.src)
         const cardsRoupas = Array.from(document.querySelectorAll('.card-roupa'));

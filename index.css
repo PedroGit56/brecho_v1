@@ -12,6 +12,12 @@ body {
     background-color: #3a6ea5; /* Azul clássico de backup do Windows */
     color: #000000;
 }
+
+/* Evita que a página ao fundo role quando um modal está aberto. */
+body.modal-aberto {
+    overflow: hidden;
+    overscroll-behavior: none;
+}
 .container {
     max-width: 1000px; /* Limita a largura no desktop para ficar compacto */
     margin: 24px auto; /* Centraliza na tela e deixa o wallpaper visível nas laterais e topo */
@@ -140,20 +146,7 @@ body {
     pointer-events: none;
 }
 
-/* Rover acompanha o Bonzi e fica apoiado sobre a aba. */
-.banner-destaque .rover {
-    position: absolute;
-    right: 4px;
-    bottom: calc(100% - 34px);
-    width: 100px;
-    height: 100px;
-    object-fit: contain;
-    object-position: bottom center;
-    z-index: 6;
-    pointer-events: none;
-}
-
-/* Ajuste no celular para não bater no adesivo da direita */
+/* Ajuste do Bonzi para celular. */
 @media (max-width: 650px) {
     .titulo-secao {
         margin-top: 62px;
@@ -165,12 +158,6 @@ body {
         height: 140px;
     }
 
-    .banner-destaque .rover {
-        right: -30px;
-        bottom: calc(100% - 34px);
-        width: 140px;
-        height: 140px;
-    }
 }
 
 
@@ -588,6 +575,17 @@ body {
     text-shadow: 1px 1px 1px #001f66;
 }
 
+#modal-sobre .modal-caixa::before {
+    content: "📁 Sobre_a_Caculinha.exe";
+    position: absolute;
+    top: 8px;
+    left: 12px;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 700;
+    text-shadow: 1px 1px 1px #001f66;
+}
+
 #modal-detalhes .modal-caixa::before {
     content: "👕 Detalhes_da_Peca.exe";
     position: absolute;
@@ -839,41 +837,6 @@ body {
     object-fit: contain; /* Garante que a roupa apareça 100% inteira sem nenhum corte */
 }
 
-/* Setas laterais estilo botão clássico do Windows */
-.btn-seta-foto {
-    background: #d4d0c8;
-    border-top: 2px solid #ffffff;
-    border-left: 2px solid #ffffff;
-    border-right: 2px solid #404040;
-    border-bottom: 2px solid #404040;
-    color: #000000;
-    font-size: 16px;
-    width: 38px;
-    height: 48px;
-    cursor: pointer;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.btn-seta-foto:hover {
-    background: #0054e3;
-    color: #ffffff;
-}
-
-/* O visualizador exibe somente a foto da peça selecionada. */
-#modal-foto-cheia .btn-seta-foto {
-    display: none;
-}
-
-.btn-seta-foto:active {
-    border-top: 2px solid #404040;
-    border-left: 2px solid #404040;
-    border-right: 2px solid #ffffff;
-    border-bottom: 2px solid #ffffff;
-}
-
 .lightbox-legenda {
     margin-top: 12px !important;
     margin-bottom: 0 !important;
@@ -895,11 +858,6 @@ body {
         height: 55vh;
     }
 
-    .btn-seta-foto {
-        width: 32px;
-        height: 40px;
-        font-size: 13px;
-    }
 }
 
 
