@@ -932,11 +932,29 @@ body {
 }
 
 @media (max-width: 480px) {
-    .campo-roupas {
-        grid-template-columns: 1fr;
+    /* O Safari calcula o background fixo em relação à página inteira.
+       Este elemento fixo mantém o wallpaper na escala da tela. */
+    body {
+        background-image: none;
+        isolation: isolate;
+    }
+
+    body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        background: url('./assets/windows.png') center / cover no-repeat;
     }
 
     .btn-detalhes {
         bottom: 8px;
+    }
+}
+
+/* Em telas realmente estreitas, os cards passam para uma coluna. */
+@media (max-width: 360px) {
+    .campo-roupas {
+        grid-template-columns: 1fr;
     }
 }
