@@ -49,7 +49,7 @@
         <!-- Vitrine de Roupas -->
         <main class="campo-roupas">
             <!-- Card 1 -->
-            <div class="card-roupa">
+            <div class="card-roupa" data-fotos="assets/roupa1.png, assets/roupa2.png">
                 <div class="imagem-container">
                     <span class="etiqueta">PEÇA ÚNICA • TAM M</span>
                     <img src="assets/roupa1.png" alt="Jaqueta Jeans Vintage">
@@ -165,9 +165,9 @@
     <div class="modal-fundo" id="modal-sobre">
         <div class="modal-caixa">
             <button class="modal-fechar" id="btn-fechar-sobre" aria-label="Fechar">&times;</button>
-            <h3>Sobre a Caçulinha Brechó</h3>
-            <p>Peças únicas, selecionadas com cuidado para ganhar uma nova história.</p>
-            <p>Nosso garimpo reúne estilo, personalidade e preços acessíveis para você se vestir do seu jeito.</p>
+            <h3>Olá, eu sou a Heloísa!</h3>
+            <p>A Caçulinha Brechó nasceu do meu desejo de dar uma nova história a roupas especiais. Cada peça é garimpada com carinho, higienizada, recondicionada e escolhida para chegar até você com estilo e personalidade..</p>
+            <p>Seja bem-vinda(o) à Caçulinha Brechó!</p>
         </div>
     </div>
 
@@ -217,9 +217,11 @@
         <button class="modal-fechar" id="btn-fechar-foto">&times;</button>
         
         <div class="lightbox-corpo">
+            <button class="btn-seta-foto" id="btn-foto-anterior" title="Foto anterior">&#9664;</button>
             <div class="lightbox-img-container">
                 <img id="img-tela-cheia" src="" alt="Visualização ampliada da peça">
             </div>
+            <button class="btn-seta-foto" id="btn-foto-proxima" title="Próxima foto">&#9654;</button>
         </div>
 
         <p class="lightbox-legenda" id="legenda-foto-cheia">Visualizando peça</p>
@@ -285,7 +287,8 @@
                 document.getElementById('detalhe-titulo').innerText = titulo;
                 document.getElementById('detalhe-img').src = imgSrc;
                 document.getElementById('detalhe-etiqueta').innerText = etiqueta;
-                fotoAtualIndex = index;
+                cardAtualIndex = index;
+                fotoAtualIndex = 0;
 
                 modalDetalhes.classList.add('ativo');
                 document.body.classList.add('modal-aberto');
@@ -309,30 +312,39 @@
         const imgTelaCheia = document.getElementById('img-tela-cheia');
         const legendaFotoCheia = document.getElementById('legenda-foto-cheia');
         const btnFecharFoto = document.getElementById('btn-fechar-foto');
+        const btnFotoAnterior = document.getElementById('btn-foto-anterior');
+        const btnFotoProxima = document.getElementById('btn-foto-proxima');
 
         // Monta a lista com todas as peças da vitrine usando a mesma URL (.src)
         const cardsRoupas = Array.from(document.querySelectorAll('.card-roupa'));
         const catalogoFotos = cardsRoupas.map(card => ({
-            src: card.querySelector('img').src,
+            fotos: (card.dataset.fotos || card.querySelector('img').getAttribute('src'))
+                .split(',')
+                .map(foto => foto.trim())
+                .filter(Boolean),
             titulo: card.querySelector('h3').innerText
         }));
 
+        let cardAtualIndex = 0;
         let fotoAtualIndex = 0;
 
-        function abrirModalFoto(indice) {
-            const foto = catalogoFotos[indice];
-            if (!foto) return;
+        function abrirModalFoto(indiceCard, indiceFoto = 0) {
+            const peca = catalogoFotos[indiceCard];
+            if (!peca) return;
 
-            fotoAtualIndex = indice;
-            imgTelaCheia.src = foto.src;
-            legendaFotoCheia.innerText = `${foto.titulo} (1 de 1)`;
+            cardAtualIndex = indiceCard;
+            fotoAtualIndex = (indiceFoto + peca.fotos.length) % peca.fotos.length;
+            imgTelaCheia.src = peca.fotos[fotoAtualIndex];
+            legendaFotoCheia.innerText = `${peca.titulo} (${fotoAtualIndex + 1} de ${peca.fotos.length})`;
+            btnFotoAnterior.hidden = peca.fotos.length <= 1;
+            btnFotoProxima.hidden = peca.fotos.length <= 1;
             modalFotoCheia.classList.add('ativo');
         }
 
         // Abre ao clicar na foto dentro do Modal de Detalhes
         const detalheImg = document.getElementById('detalhe-img');
         detalheImg.addEventListener('click', () => {
-            abrirModalFoto(fotoAtualIndex);
+            abrirModalFoto(cardAtualIndex, fotoAtualIndex);
         });
 
         // Abre também ao clicar direto na imagem do card na vitrine
@@ -342,6 +354,14 @@
             imgCard.addEventListener('click', () => {
                 abrirModalFoto(index);
             });
+        });
+
+        btnFotoAnterior.addEventListener('click', () => {
+            abrirModalFoto(cardAtualIndex, fotoAtualIndex - 1);
+        });
+
+        btnFotoProxima.addEventListener('click', () => {
+            abrirModalFoto(cardAtualIndex, fotoAtualIndex + 1);
         });
 
         // Setas de navegação
@@ -359,6 +379,8 @@
         // Navegação pelo teclado (Setas e ESC)
         document.addEventListener('keydown', (evento) => {
             if (modalFotoCheia.classList.contains('ativo')) {
+                if (evento.key === 'ArrowLeft') abrirModalFoto(cardAtualIndex, fotoAtualIndex - 1);
+                if (evento.key === 'ArrowRight') abrirModalFoto(cardAtualIndex, fotoAtualIndex + 1);
                 if (evento.key === 'Escape') modalFotoCheia.classList.remove('ativo');
             }
         });
