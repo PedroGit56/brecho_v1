@@ -862,6 +862,11 @@ body {
     color: #ffffff;
 }
 
+/* O visualizador exibe somente a foto da peça selecionada. */
+#modal-foto-cheia .btn-seta-foto {
+    display: none;
+}
+
 .btn-seta-foto:active {
     border-top: 2px solid #404040;
     border-left: 2px solid #404040;

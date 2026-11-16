@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>brecho_v1 — Teste</title>
+    <title>Caçulinha Brecho</title>
     <!-- Links do Google Fonts corrigidos -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,7 +34,7 @@
         <section class="banner-destaque">
             <img class="rover" src="assets/rover.gif" alt="Rover">
             <div class="banner-texto">
-                <span class="subtitulo">TESTE</span>
+                <span class="subtitulo">SEJA BEM VINDO</span>
                 
                 <h1>Moda com estilo e personalidade</h1>
                 <p>Garimpos selecionados a dedo, higienizados e prontos para uma nova história.</p>
@@ -251,7 +251,7 @@
         const btnFecharDetalhes = document.getElementById('btn-fechar-detalhes');
         const botoesDetalhes = document.querySelectorAll('.btn-detalhes');
 
-        botoesDetalhes.forEach(botao => {
+        botoesDetalhes.forEach((botao, index) => {
             botao.addEventListener('click', () => {
                 const card = botao.closest('.card-roupa');
                 const titulo = card.querySelector('h3').innerText;
@@ -261,6 +261,7 @@
                 document.getElementById('detalhe-titulo').innerText = titulo;
                 document.getElementById('detalhe-img').src = imgSrc;
                 document.getElementById('detalhe-etiqueta').innerText = etiqueta;
+                fotoAtualIndex = index;
 
                 modalDetalhes.classList.add('ativo');
             });
@@ -294,17 +295,19 @@
         let fotoAtualIndex = 0;
 
         function abrirModalFoto(indice) {
-            fotoAtualIndex = (indice + catalogoFotos.length) % catalogoFotos.length;
-            imgTelaCheia.src = catalogoFotos[fotoAtualIndex].src;
-            legendaFotoCheia.innerText = `${catalogoFotos[fotoAtualIndex].titulo} (${fotoAtualIndex + 1} de ${catalogoFotos.length})`;
+            const foto = catalogoFotos[indice];
+            if (!foto) return;
+
+            fotoAtualIndex = indice;
+            imgTelaCheia.src = foto.src;
+            legendaFotoCheia.innerText = `${foto.titulo} (1 de 1)`;
             modalFotoCheia.classList.add('ativo');
         }
 
         // Abre ao clicar na foto dentro do Modal de Detalhes
         const detalheImg = document.getElementById('detalhe-img');
         detalheImg.addEventListener('click', () => {
-            const indiceEncontrado = catalogoFotos.findIndex(item => item.src === detalheImg.src);
-            abrirModalFoto(indiceEncontrado !== -1 ? indiceEncontrado : 0);
+            abrirModalFoto(fotoAtualIndex);
         });
 
         // Abre também ao clicar direto na imagem do card na vitrine
@@ -317,14 +320,6 @@
         });
 
         // Setas de navegação
-        btnFotoAnterior.addEventListener('click', () => {
-            abrirModalFoto(fotoAtualIndex - 1);
-        });
-
-        btnFotoProxima.addEventListener('click', () => {
-            abrirModalFoto(fotoAtualIndex + 1);
-        });
-
         // Fechar modal de foto no X ou clicando fora
         btnFecharFoto.addEventListener('click', () => {
             modalFotoCheia.classList.remove('ativo');
@@ -339,8 +334,6 @@
         // Navegação pelo teclado (Setas e ESC)
         document.addEventListener('keydown', (evento) => {
             if (modalFotoCheia.classList.contains('ativo')) {
-                if (evento.key === 'ArrowLeft') abrirModalFoto(fotoAtualIndex - 1);
-                if (evento.key === 'ArrowRight') abrirModalFoto(fotoAtualIndex + 1);
                 if (evento.key === 'Escape') modalFotoCheia.classList.remove('ativo');
             }
         });
